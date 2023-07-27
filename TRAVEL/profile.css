@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000;
+    font-family: "Poppins", sans-serif;
+    background: hsl(213, 33%, 84%);
+}
+
+.card {
+    width: 350px;
+    background-color: #efefef;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.image img {
+    transition: all 0.5s
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+.btn {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%
+}
+
+.name {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.idd {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.idd1 {
+    font-size: 12px
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.follow {
+    font-size: 12px;
+    font-weight: 500;
+    color: #444444
+}
+
+.btn1, .btn3 {
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: #000;
+    color: #aeaeae;
+    font-size: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px;
+}
+
+.btn1:hover {
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn1:focus {
+    outline: none;
+}
+
+.btn-dark {
+    background-color: #000;
+    color: #aeaeae;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-dark:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.btn-dark:focus {
+    outline: none;
+}
+
+.btn-success {
+    background-color: hsl(214, 57%, 51%);
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-danger{
+    background-color: #000;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn3:hover {
+    background-color: red;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-success:hover {
+    background-color: hsl(214, 72%, 33%);
+}
+
+.btn-success:focus {
+    outline: none;
+}
+
+.text span {
+    font-size: 13px;
+    color: #545454;
+    font-weight: 500
+}
+
+.icons i {
+    font-size: 19px
+}
+
+hr .new1 {
+    border: 1px solid
+}
+
+.join {
+    font-size: 14px;
+    color: #a0a0a0;
+    font-weight: bold
+}
+
+.date {
+    background-color: #ccc
+}

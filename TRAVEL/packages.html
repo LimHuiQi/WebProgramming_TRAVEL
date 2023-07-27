@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Packages</title>
+    <link rel="shortcut icon" href="assets/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200&family=Poppins:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Nunito:ital,wght@1,200&family=Poppins:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="substyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        function redirectToBooking(packageId) {
+            var packageTitle = document.getElementById(packageId).innerText;
+            var encodedPackageTitle = encodeURIComponent(packageTitle);
+            var bookingURL = "booking.html?package=" + encodedPackageTitle;
+            window.location.href = bookingURL;
+        }
+    </script>
+
+</head>
+<style>
+    .page-wrapper {
+        width: 100%;
+        height: auto;
+    }
+
+    .nav-wrapper {
+        width: 100%;
+        position: -webkit-sticky;
+        /* Safari */
+        position: sticky;
+        top: 0;
+        background: hsl(213, 33%, 84%);
+        z-index: 99;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .grad-bar {
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+        background-size: 400% 400%;
+        -webkit-animation: gradbar 15s ease infinite;
+        -moz-animation: gradbar 15s ease infinite;
+        animation: gradbar 15s ease infinite;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 75px;
+        overflow: hidden;
+        position: relative;
+        z-index: 99;
+        margin-bottom: 20px;
+        /* Add margin-bottom as needed */
+    }
+
+    .navbar img {
+        height: 16px;
+        width: auto;
+        justify-self: start;
+        margin-left: 20px;
+    }
+
+    .navbar ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style-type: none;
+    }
+
+    .navbar li {
+        margin-right: 30px;
+    }
+
+    .navbar li a {
+        font-size: 1rem;
+    }
+
+    .nav-item a {
+        color: #333;
+        font-size: 0.9rem;
+        font-weight: 400;
+        text-decoration: none;
+        transition: color 0.3s ease-out;
+    }
+
+    .nav-item a:hover {
+        color: #3498db;
+    }
+
+    .logo {
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 25px;
+        /* Add other styling as needed */
+    }
+
+
+    .nav-links li {
+        margin-right: 15px;
+        margin-left: 15px;
+        /* display: inline; */
+        /* Add other styling as needed */
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        /* Add other styling as needed */
+    }
+
+
+
+    /* SEARCH FUNCTION */
+
+    #search-icon {
+        font-size: 0.9rem;
+        margin-top: 3px;
+        transition: color 0.3s ease-out;
+        margin-right: 30px;
+    }
+
+    #search-icon:hover {
+        color: #3498db;
+        cursor: pointer;
+    }
+
+    .search {
+        transform: translate(-35%);
+        -webkit-transform: translate(-35%);
+        transition: transform 0.7s ease-in-out;
+        color: #3498db;
+    }
+
+    .no-search {
+        transform: translate(0);
+        transition: transform 0.7s ease-in-out;
+    }
+
+    .search-input {
+        position: absolute;
+        top: -4px;
+        right: -100px;
+        /* Adjust the value as needed */
+        width: 100px;
+        /* Adjust the width as needed */
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.6s ease;
+    }
+
+    .search-active {
+        opacity: 1;
+        z-index: 0;
+    }
+
+    input {
+        border: 0;
+        border-left: 1px solid #ccc;
+        border-radius: 0;
+        /* FOR SAFARI */
+        outline: 0;
+        padding: 5px;
+    }
+
+    /* MOBILE MENU & ANIMATION */
+
+    .menu-toggle .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #3f3f3f;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .menu-toggle {
+        justify-self: end;
+        margin-right: 25px;
+        display: none;
+    }
+
+    .menu-toggle:hover {
+        cursor: pointer;
+    }
+
+    #mobile-menu.is-active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    #mobile-menu.is-active .bar:nth-child(1) {
+        -webkit-transform: translateY(8px) rotate(45deg);
+        -ms-transform: translateY(8px) rotate(45deg);
+        -o-transform: translateY(8px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    #mobile-menu.is-active .bar:nth-child(3) {
+        -webkit-transform: translateY(-8px) rotate(-45deg);
+        -ms-transform: translateY(-8px) rotate(-45deg);
+        -o-transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* KEYFRAME ANIMATIONS */
+
+    @-webkit-keyframes gradbar {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @-moz-keyframes gradbar {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes gradbar {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    .wp-travel-default-article {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        /* Modified box shadow */
+        margin-bottom: 20px;
+    }
+
+    .wp-travel-article-image-wrap {
+        flex-basis: 40%;
+        margin-right: 20px;
+    }
+
+    .wp-travel-article-image-wrap img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .wp-travel-entry-content-wrapper {
+        flex-basis: 60%;
+    }
+
+    .entry-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .entry-content {
+        margin-bottom: 10px;
+    }
+
+    .entry-meta {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .wp-travel-trip-time.trip-duration i {
+        margin-right: 5px;
+    }
+
+    .travel-info {
+        margin-right: 20px;
+    }
+
+    .trip-price {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .wp-travel-explore a {
+        padding: 10px 20px;
+        border-radius: 9999px;
+        text-decoration: none;
+    }
+
+    .description-left {
+        width: 70%;
+        float: left;
+        padding: 0 20px;
+    }
+
+    .description-left .entry-header {
+        position: relative;
+    }
+
+    .description-left .entry-content {
+        margin-top: 0;
+        text-align: justify;
+    }
+
+    .description-right {
+        width: 30%;
+        float: right;
+        text-align: center;
+        border-left: 1px solid #eee;
+        padding-top: 100px;
+        /* Add padding to the top */
+    }
+
+
+    .description-right .trip-price {
+        margin: 35px 0 25px;
+    }
+
+    .description-right .wptravel-price-wrap {
+        text-align: center;
+    }
+
+    .description-right .trip-price .price-from {
+        font-size: 14px;
+    }
+
+    .description-right .trip-price .person-count {
+        font-weight: 600;
+        font-size: 22px;
+    }
+
+    .wp-travel-explore.wp-block-button.is-style-outline {
+        margin-top: 20px;
+        display: inline-block;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="page-wrapper">
+            <div class="nav-wrapper">
+                <div class="grad-bar"></div>
+                <nav class="navbar">
+                    <a class="logo" href="index.html" style="color: #333; font-size: 1.5rem;">TRAVEL</a>
+
+                    <div class="menu-toggle" id="mobile-menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                    <ul class="nav no-search">
+                        <li class="nav-item"><a href="index.html">Home</a></li>
+                        <li class="nav-item"><a href="about.html">About Us</a></li>
+                        <li class="nav-item"><a href="destination.html">Destination</a></li>
+                        <li class="nav-item"><a href="packages.html">Packages</a></li>
+                        <li class="nav-item"><a href="contact.html">Contact Us</a></li>
+                        <i class="fas fa-search" id="search-icon"></i>
+                        <input class="search-input" id="search-input" type="text" placeholder="Search..">
+                    </ul>
+                </nav>
+            </div>
+    </header>
+    <div class="my-5 px-4">
+        <h2 class="fw-bold h-font text-center">PACKAGES</h2>
+
+        <div class="h-line bg-dark"></div>
+
+    </div>
+    <div class="container">
+
+        <div class="inner-wrapper">
+            <div class="wp-travel-archive-content wp-travel-trips-has-sidebar">
+                <!-- P1 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/caves.jpg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-1">
+                                    Package 1: Kuala Selangor Exploration (3D2N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 1: Kuala Selangor Exploration (3D2N) offers a 3-day, 2-night exploration of
+                                    Kuala Selangor,
+                                    Selangor. It includes a comfortable stay in a well-appointed hotel, round-trip
+                                    transportation to
+                                    Kuala Selangor, guided tours to famous attractions such as the Kuala Selangor
+                                    Fireflies Sanctuary,
+                                    Bukit Melawati, and the historical Kuala Selangor Fort. Engage in exciting
+                                    activities like a river
+                                    cruise to witness mesmerizing firefly colonies, visit Melawati Hill to see silvered
+                                    leaf monkeys,
+                                    and immerse yourself in the rich history and culture of the area. Daily breakfast at
+                                    the hotel is
+                                    included to start your day with energy.
+                                </p>
+                            </div>
+                            <div class="entry-meta">
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">3-5 Pax</span>
+                                </div>
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">3 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <div class="trip-price">
+                                    <span class="price-from">From</span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span><span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">1,500.00</span></span>
+                                        </ins>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-1')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- P2 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/sarawak.jpg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-2">
+                                    Package 2: Sarawak Adventure (4D3N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 2: Sarawak Adventure (4D3N) offers a 4-day, 3-night journey through Kuching,
+                                    Sarawak,
+                                    showcasing the region's natural wonders and rich cultural heritage. The adventure
+                                    starts with a
+                                    comfortable stay in a well-appointed hotel, followed by guided tours of Kuching's
+                                    highlights,
+                                    including its charming streets, vibrant markets, and iconic landmarks. Visit Sarawak
+                                    Village to learn
+                                    about the indigenous culture and traditions. Explore the lush rainforests and
+                                    wildlife, including
+                                    jungle trekking, river cruises, and wildlife spotting, guided by knowledgeable
+                                    guides. Discover the
+                                    secrets of the rainforest, exotic flora and fauna, and witness the awe-inspiring
+                                    beauty of Sarawak's
+                                    landscapes. Savor delicious meals that showcase the flavors of Sarawak and
+                                    complement your journey.
+                                </p>
+                            </div>
+                            <div class="entry-meta">
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">5-6 Pax</span>
+                                </div>
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">4 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <div class="trip-price">
+                                    <span class="price-from">From</span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span><span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">1,600.00</span></span>
+                                        </ins>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-2')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+
+                <!-- P3 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/desaru.jpeg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-3">
+                                    Package 3: Coastal Getaway (5D4N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 3: Coastal Getaway (5D4N) offers a 5-day, 4-night getaway to the picturesque
+                                    coastal
+                                    destinations of Desaru Coast, Johor Bahru, and Pulau Tioman, Pahang. This 5-day,
+                                    4-night getaway
+                                    offers relaxation, adventure, and stunning natural beauty. Enjoy luxurious
+                                    accommodations along the
+                                    coast, indulge in activities like lounging on pristine sandy beaches, diving into
+                                    crystal-clear
+                                    waters, and exploring the wonders of Desaru Coast. Explore Pulau Tioman, known for
+                                    its breathtaking
+                                    landscapes and vibrant coral reefs, and snorkel or dive among the diverse marine
+                                    ecosystems. Enjoy
+                                    round-trip transportation between destinations, ensuring a seamless transition
+                                    between the
+                                    destinations. Enjoy romantic beachside dinners and create unforgettable memories in
+                                    these idyllic
+                                    coastal destinations.
+                                </p>
+                            </div>
+                            <div class="entry-meta">
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">1-2 Pax</span>
+                                </div>
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">5 Days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <div class="trip-price">
+                                    <span class="price-from">From</span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span><span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">2,000.00</span></span>
+                                        </ins>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-3')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- P4 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/langkawi.jpg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </a>
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-4">
+                                    Package 4: Island Paradise (6D5N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 4: Island Paradise (6D5N) offers a 6-day, 5-night
+                                    journey to Pulau Langkawi,
+                                    Kedah, and Pulau Redang, Terengganu, Malaysia. Experience
+                                    pristine beaches, lush
+                                    rainforests, and stunning landscapes in Pulau Langkawi,
+                                    while exploring
+                                    crystal-clear waters, coral reefs, and marine life in Pulau
+                                    Redang. Snorkel or dive
+                                    among colorful coral gardens, encounter tropical fish, and
+                                    relax on soft sandy
+                                    beaches. Enjoy comfortable accommodations, delicious meals,
+                                    and create cherished
+                                    memories while exploring these enchanting islands.
+                            </div>
+                            <div class="entry-meta">
+
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">5-6 Pax</span>
+                                </div>
+
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">
+                                            6 Days </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <!-- <div class="wp-travel-trip-detail"> -->
+                                <div class="trip-price">
+                                    <span class="price-from">
+                                        From </span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span> <span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">2,300.00</span>
+                                            </span>
+                                        </ins>
+                                    </span>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-4')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                </article>
+                <!-- P5 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/melaka.jpg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </a>
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-5">
+                                    Package 5: Cultural Heritage (3D2N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 5: Cultural Heritage (3D2N) offers a 3-day,
+                                    2-night tour of the rich
+                                    cultural heritage of Jonker Street in Melaka and the
+                                    iconic Batu Caves in Selangor.
+                                    The package includes a visit to Jonker Street, where
+                                    you can explore historical
+                                    sites, taste local delicacies, and witness
+                                    traditional performances. Melaka's
+                                    diverse heritage includes influences from Chinese,
+                                    Dutch, and Portuguese cultures.
+                                    Batu Caves, Selangor, is a renowned Hindu temple and
+                                    natural marvel, offering
+                                    stunning cave formations and panoramic views. The
+                                    package includes transportation,
+                                    comfortable accommodations, and opportunities to
+                                    engage with local culture. Immerse
+                                    yourself in the vibrant colors, flavors, and
+                                    traditions of Jonker Street and Batu
+                                    Caves, creating lasting memories of this cultural
+                                    heritage experience.
+                                </p>
+                            </div>
+                            <div class="entry-meta">
+
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">3-4 Pax</span>
+                                </div>
+
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">
+                                            3 Days </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <!-- <div class="wp-travel-trip-detail"> -->
+                                <div class="trip-price">
+                                    <span class="price-from">
+                                        From </span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span> <span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">1,200.00</span>
+                                            </span>
+                                        </ins>
+                                    </span>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-5')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                </article>
+                <!-- P6 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/pangkor.jpg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </a>
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-6">
+                                    Package 6: Nature Retreat (4D3N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 6: Nature Retreat (4D3N) offers a
+                                    serene 4-day, 3-night adventure to the
+                                    natural wonders of Pulau Pangkor, Perak, and
+                                    the charming city of Ipoh, Perak.
+                                    Discover the island's unspoiled beauty,
+                                    enjoy outdoor activities like hiking,
+                                    exploring hidden coves, and water sports. In
+                                    Ipoh, explore limestone hills, cave
+                                    temples, Old Town, colonial architecture,
+                                    and local markets. Enjoy comfortable
+                                    accommodations and convenient transportation
+                                    to reconnect with the natural world and
+                                    find solace in the serene surroundings of
+                                    Pulau Pangkor and Ipoh.
+                                </p>
+                            </div>
+                            <div class="entry-meta">
+
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">5-6 Pax</span>
+                                </div>
+
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">
+                                            4 Days </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <!-- <div class="wp-travel-trip-detail"> -->
+                                <div class="trip-price">
+                                    <span class="price-from">
+                                        From </span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span> <span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">800.00</span>
+                                            </span>
+                                        </ins>
+                                    </span>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-6')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                </article>
+                <!-- P7 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/sunway.jpg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </a>
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-7">
+                                    Package 7: Theme Park Extravaganza
+                                    (5D4N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 7: Theme Park Extravaganza
+                                    (5D4N) is an action-packed adventure
+                                    for
+                                    thrill-seekers and families. Enjoy
+                                    the exhilarating rides and
+                                    attractions of Sunway
+                                    Lagoon in Selangor and Legoland in
+                                    Johor. Enjoy high-speed water
+                                    slides, roller
+                                    coasters, and sun-drenched rides at
+                                    Sunway Lagoon, while exploring the
+                                    wildlife
+                                    park, interactive exhibits, and live
+                                    performances at Legoland. Immerse
+                                    yourself in
+                                    the colorful LEGO universe, build
+                                    your own LEGO creations, and witness
+                                    captivating
+                                    shows at Legoland. The package
+                                    includes convenient transportation,
+                                    comfortable
+                                    accommodations, and access to all
+                                    thrilling attractions, ensuring a
+                                    memorable and
+                                    unforgettable experience.
+                                </p>
+                            </div>
+                            <div class="entry-meta">
+
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">2-3 Pax</span>
+                                </div>
+
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">
+                                            5 Days </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <!-- <div class="wp-travel-trip-detail"> -->
+                                <div class="trip-price">
+                                    <span class="price-from">
+                                        From </span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span> <span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">1,400.00</span>
+                                            </span>
+                                        </ins>
+                                    </span>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-7')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                </article>
+                <!-- P8 -->
+                <article class="wp-travel-default-article">
+                    <div class="wp-travel-article-image-wrap">
+                        <img width="365" height="215" src="assets/packages/kuching.jpg" class="img-fluid rounded"
+                            class="attachment-wp_travel_thumbnail size-wp_travel_thumbnail wp-post-image"
+                            alt="langkawi travel bubble package" decoding="async" data-pagespeed-url-hash="1456775558"
+                            onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </a>
+                    </div>
+                    <div class="wp-travel-entry-content-wrapper">
+                        <div class="description-left">
+
+                            <header class="entry-header">
+                                <h2 class="entry-title" id="package-title-8">
+                                    Package 8: Borneo Adventure
+                                    (6D5N)
+                                </h2>
+                            </header><!-- .entry-header -->
+                            <div class="entry-content">
+                                <p>
+                                    Package 8: Borneo Adventure
+                                    (6D5N) takes you on a
+                                    thrilling 6-day, 5-night
+                                    journey
+                                    through Kuching, Sarawak,
+                                    and Semporna, Sabah. The
+                                    adventure starts in Kuching,
+                                    Sarawak's capital, where you
+                                    can explore the city's
+                                    charming streets, cultural
+                                    landmarks, and immerse
+                                    yourself in the local arts
+                                    scene. You'll learn about
+                                    indigenous cultures, crafts,
+                                    and way of life. Semporna,
+                                    Sabah, is known for its
+                                    marine biodiversity and
+                                    world-class diving sites.
+                                    You'll dive into coral
+                                    reefs,
+                                    encounter exotic marine
+                                    species, and witness
+                                    underwater landscapes.
+                                    The adventure includes
+                                    comfortable accommodations,
+                                    convenient transportation,
+                                    and
+                                    knowledgeable local guides.
+                                    Enjoy an unforgettable
+                                    experience exploring the
+                                    wonders
+                                    of Borneo's natural
+                                    landscapes, unique wildlife,
+                                    and cultural heritage.
+                                </p>
+                            </div>
+                            <div class="entry-meta">
+
+                                <div class="travel-info">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span class="value">7-8 Pax</span>
+                                </div>
+
+                                <div class="travel-info">
+                                    <div class="wp-travel-trip-time trip-duration">
+                                        <i class="bi bi-calendar-fill"></i>
+                                        <span class="wp-travel-trip-duration">
+                                            6 Days </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-right">
+                            <div class="wptravel-price-wrap">
+                                <!-- <div class="wp-travel-trip-detail"> -->
+                                <div class="trip-price">
+                                    <span class="price-from">
+                                        From </span>
+                                    <span class="person-count">
+                                        <ins>
+                                            <span> <span class="wp-travel-trip-currency">RM</span><span
+                                                    class="wp-travel-trip-price-figure">2,000.00</span>
+                                            </span>
+                                        </ins>
+                                    </span>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="wp-travel-explore wp-block-button is-style-outline">
+                                <a href="#" onclick="redirectToBooking('package-title-8')"
+                                    class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            </div>
+                        </div>
+                </article>
+                <script>
+                    // Get the search icon element
+                    var searchIcon = document.getElementById('search-icon');
+
+                    // Get the menu toggle element
+                    var menuToggle = document.querySelector('.menu-toggle');
+
+                    // Get the navigation elements
+                    var navElements = document.querySelectorAll('.nav');
+
+                    // Get the search input
+                    var searchInput = document.querySelector('.search-input');
+
+                    // Add click event listener to the search icon
+                    searchIcon.addEventListener('click', function () {
+                        // Toggle the search class on navigation elements
+                        navElements.forEach(function (element) {
+                            element.classList.toggle('search');
+                            element.classList.toggle('no-search');
+                        });
+
+                        // Toggle the search-active class on the search input
+                        searchInput.classList.toggle('search-active');
+                    });
+
+                    // Add click event listener to the menu toggle
+                    menuToggle.addEventListener('click', function () {
+                        // Toggle the mobile-nav class on navigation elements
+                        navElements.forEach(function (element) {
+                            element.classList.toggle('mobile-nav');
+                        });
+
+                        // Toggle the is-active class on the menu toggle
+                        this.classList.toggle('is-active');
+                    });
+
+                    // Add click event listener to the document
+                    document.addEventListener('click', function (event) {
+                        // Check if the clicked element is part of the search bar or the search icon
+                        if (!searchInput.contains(event.target) && event.target !== searchIcon) {
+                            // Close the search bar
+                            searchInput.classList.remove('search-active');
+                            navElements.forEach(function (element) {
+                                element.classList.remove('search');
+                                element.classList.add('no-search');
+                            });
+                        }
+                    });</script>
+</body>
+
+</html>

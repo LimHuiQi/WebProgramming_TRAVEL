@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Destination</title>
+  <link rel="shortcut icon" href="assets/favicon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200&family=Poppins:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Nunito:ital,wght@1,200&family=Poppins:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="substyle.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function redirectToBooking(packageId) {
+        var packageTitle = document.getElementById(packageId).innerText;
+        var encodedPackageTitle = encodeURIComponent(packageTitle);
+        var bookingURL = "booking.html?package=" + encodedPackageTitle;
+        window.location.href = bookingURL;
+    }
+</script>
+
+</head>
+<style>
+  .rating {
+    margin-bottom: 10px;
+  }
+
+  .rating i {
+    color: #ffcc00;
+  }
+
+  .text-wrap {
+    display: inline-block;
+    width: 100%;
+    overflow-wrap: break-word;
+    text-align: justify;
+    white-space: normal;
+  }
+
+  .enlarged-price {
+    font-size: 1.4em;
+    /* Adjust the font size as needed */
+    font-weight: bold;
+    /* Add any additional styling if desired */
+  }
+
+
+  .page-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  .nav-wrapper {
+    width: 100%;
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    top: 0;
+    background: hsl(213, 33%, 84%);
+    z-index: 99;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .grad-bar {
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    -webkit-animation: gradbar 15s ease infinite;
+    -moz-animation: gradbar 15s ease infinite;
+    animation: gradbar 15s ease infinite;
+  }
+
+  /* NAVIGATION */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 75px;
+    overflow: hidden;
+    position: relative;
+    z-index: 99;
+    margin-bottom: 20px;
+    /* Add margin-bottom as needed */
+  }
+
+  .navbar img {
+    height: 16px;
+    width: auto;
+    justify-self: start;
+    margin-left: 20px;
+  }
+
+  .navbar ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+  }
+
+  .navbar li {
+    margin-right: 30px;
+  }
+
+  .navbar li a {
+    font-size: 1rem;
+  }
+
+  .nav-item a {
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+  }
+
+  .nav-item a:hover {
+    color: #3498db;
+  }
+
+  .logo {
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 25px;
+    /* Add other styling as needed */
+  }
+
+
+  .nav-links li {
+    margin-right: 15px;
+    margin-left: 15px;
+    /* display: inline; */
+    /* Add other styling as needed */
+  }
+
+  .nav-links li a {
+    text-decoration: none;
+    /* Add other styling as needed */
+  }
+
+
+
+  /* SEARCH FUNCTION */
+
+  #search-icon {
+    font-size: 0.9rem;
+    margin-top: 3px;
+    transition: color 0.3s ease-out;
+    margin-right: 30px;
+  }
+
+  #search-icon:hover {
+    color: #3498db;
+    cursor: pointer;
+  }
+
+  .search {
+    transform: translate(-35%);
+    -webkit-transform: translate(-35%);
+    transition: transform 0.7s ease-in-out;
+    color: #3498db;
+  }
+
+  .no-search {
+    transform: translate(0);
+    transition: transform 0.7s ease-in-out;
+  }
+
+  .search-input {
+    position: absolute;
+    top: -4px;
+    right: -100px;
+    /* Adjust the value as needed */
+    width: 100px;
+    /* Adjust the width as needed */
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.6s ease;
+  }
+
+  .search-active {
+    opacity: 1;
+    z-index: 0;
+  }
+
+  input {
+    border: 0;
+    border-left: 1px solid #ccc;
+    border-radius: 0;
+    /* FOR SAFARI */
+    outline: 0;
+    padding: 5px;
+  }
+
+  /* MOBILE MENU & ANIMATION */
+
+  .menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #3f3f3f;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu-toggle {
+    justify-self: end;
+    margin-right: 25px;
+    display: none;
+  }
+
+  .menu-toggle:hover {
+    cursor: pointer;
+  }
+
+  #mobile-menu.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  #mobile-menu.is-active .bar:nth-child(1) {
+    -webkit-transform: translateY(8px) rotate(45deg);
+    -ms-transform: translateY(8px) rotate(45deg);
+    -o-transform: translateY(8px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  #mobile-menu.is-active .bar:nth-child(3) {
+    -webkit-transform: translateY(-8px) rotate(-45deg);
+    -ms-transform: translateY(-8px) rotate(-45deg);
+    -o-transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* KEYFRAME ANIMATIONS */
+
+  @-webkit-keyframes gradbar {
+    0% {
+      background-position: 0% 50%
+    }
+
+    50% {
+      background-position: 100% 50%
+    }
+
+    100% {
+      background-position: 0% 50%
+    }
+  }
+
+  @-moz-keyframes gradbar {
+    0% {
+      background-position: 0% 50%
+    }
+
+    50% {
+      background-position: 100% 50%
+    }
+
+    100% {
+      background-position: 0% 50%
+    }
+  }
+
+  @keyframes gradbar {
+    0% {
+      background-position: 0% 50%
+    }
+
+    50% {
+      background-position: 100% 50%
+    }
+
+    100% {
+      background-position: 0% 50%
+    }
+  }
+</style>
+
+<body>
+  <header>
+    <div class="page-wrapper">
+      <div class="nav-wrapper">
+        <div class="grad-bar"></div>
+        <nav class="navbar">
+          <a class="logo" href="index.html" style="color: #333; font-size: 1.5rem;">TRAVEL</a>
+          <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav no-search">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="about.html">About Us</a></li>
+            <li class="nav-item"><a href="destination.html">Destination</a></li>
+            <li class="nav-item"><a href="packages.html">Packages</a></li>
+            <li class="nav-item"><a href="contact.html">Contact Us</a></li>
+            <i class="fas fa-search" id="search-icon"></i>
+            <input class="search-input" id="search-input" type="text" placeholder="Search..">
+          </ul>
+        </nav>
+      </div>
+  </header>
+
+  <div class="my-5 px-4">
+    <h2 class="fw-bold h-font text-center">DESTINATION</h2>
+
+    <div class="h-line bg-dark"></div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-12 mb-lg-0 mb-4 px-0">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
+          <div class="container-fluid flex-lg-column align-items-stretch">
+            <h4 class="mt-2">FILTERS</h4>
+            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
+              data-bs-target="#filterDropdown" aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
+              <div class="border bg-light p-3 rounded mb-3">
+                <h5 class="mb-3" style="font-size: 18px;">Search</h5>
+                <div class="d-flex">
+                  <div class="me-2">
+                    <label class="form-label">Destination</label>
+                    <input type="text" class="form-control shadow-none" placeholder="Enter your destination">
+                  </div>
+                </div>
+              </div>
+              <div class="border bg-light p-3 rounded mb-3">
+                <h5 class="mb-3" style="font-size: 18px;">SELECT STATE</h5>
+                <div class="mb-3">
+                  <label class="form-label">Check-in</label>
+                  <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle shadow-none" type="button" id="checkinDropdown"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      Select State
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="checkinDropdown">
+                      <li><a class="dropdown-item" href="#">Johor</a></li>
+                      <li><a class="dropdown-item" href="#">Kedah</a></li>
+                      <li><a class="dropdown-item" href="#">Kelantan</a></li>
+                      <li><a class="dropdown-item" href="#">Melaka</a></li>
+                      <li><a class="dropdown-item" href="#">Negeri Sembilan</a></li>
+                      <li><a class="dropdown-item" href="#">Pahang</a></li>
+                      <li><a class="dropdown-item" href="#">Perak</a></li>
+                      <li><a class="dropdown-item" href="#">Perlis</a></li>
+                      <li><a class="dropdown-item" href="#">Pulau Pinang</a></li>
+                      <li><a class="dropdown-item" href="#">Sabah</a></li>
+                      <li><a class="dropdown-item" href="#">Sarawak</a></li>
+                      <li><a class="dropdown-item" href="#">Selangor</a></li>
+                      <li><a class="dropdown-item" href="#">Terengganu</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="border bg-light p-3 rounded mb-3">
+                <h5 class="mb-3" style="font-size: 18px;">CATEGORIES</h5>
+                <div class="mb-2">
+                  <input type="checkbox" id="beaches" class="form-check-input shadow-none me-1">
+                  <label class="form-check-label" for="beaches">Beaches</label>
+                </div>
+                <div class="mb-2">
+                  <input type="checkbox" id="historical" class="form-check-input shadow-none me-1">
+                  <label class="form-check-label" for="historical">Historical Sites</label>
+                </div>
+                <div class="mb-2">
+                  <input type="checkbox" id="nature" class="form-check-input shadow-none me-1">
+                  <label class="form-check-label" for="nature">Nature & Wildlife</label>
+                </div>
+                <div class="mb-2">
+                  <input type="checkbox" id="adventure" class="form-check-input shadow-none me-1">
+                  <label class="form-check-label" for="adventure">Adventure Activities</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      
+
+      <div class="col-lg-9 col-md-12 px-4">
+        <!-- D1 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/caves.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-9">Batu Caves, Selangor</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Batu Caves: In Selangor, Malaysia, is a captivating limestone hill complex with impressive cave
+                  temples. Climb the 272 steps to explore the cavernous interior adorned with Hindu shrines and colorful
+                  paintings. Marvel at the towering golden statue of Lord Murugan. Batu Caves offers a spiritual and
+                  natural experience, with diverse flora and fauna. Don't miss the vibrant markets and delicious Indian
+                  snacks available nearby. It's a remarkable destination that leaves a lasting impression.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 199</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-9')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D2 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/desaru.jpeg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3">Desaru Coast, Johor Bahru</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Desaru Coast: Located in Johor Bahru, Malaysia, is a popular coastal
+                  destination that offers a perfect blend of relaxation, adventure, and luxury. With its pristine
+                  beaches, world-class resorts, thrilling water parks, and golf courses, Desaru Coast is a haven
+                  for beach lovers and thrill-seekers alike. From unwinding on sandy shores to indulging in
+                  exhilarating water activities, Desaru Coast provides an unforgettable beach getaway with a touch
+                  of sophistication.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 999</span> per pax </h6>
+              <a href="booking.html" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D3 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/genting.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-10">Genting Skyworld, Pahang</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Genting Highlands in Malaysia is a popular hill resort known for its
+                  entertainment options, cool climate, and stunning mountain views. Enjoy theme parks, a casino,
+                  shopping, and live shows at Resorts World Genting. Take in the panoramic vistas from the Genting
+                  Skyway cable car. Indulge in a variety of dining experiences and explore the nearb golf course.
+                  Genting Highlands offers a unique blend of entertainment and natural beauty for a memorable getaway.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 899</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-10')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D4 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/ipoh.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-11">Ipoh, Perak</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Ipoh: In Perak, Malaysia, is renowned as the "Food Capital." Sample Ipoh
+                  Hor Fun, Bean Sprout Chicken, and Ipoh Egg Tarts. Sip aromatic white coffee with kaya toast.
+                  Explore street art, visit cave temples, and admire the historic architecture. Ipoh is a
+                  captivating city that offers a delightful blend of cultural treasures and mouthwatering cuisine.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 399</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-11')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D5 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/kuching.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-12">Kuching, Sarawak</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Kuching: The capital of Sarawak, Malaysia, is a captivating city known for
+                  its cultural diversity, riverside charm, wildlife encounters, historical landmarks, delicious
+                  cuisine, and vibrant festivals. From exploring colonial architecture and strolling along the
+                  waterfront to immersing yourself in lush rainforests and savoring local delicacies, Kuching
+                  offers a delightful blend of experiences for travelers seeking an enriching and memorable
+                  journey.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 899</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-12')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D6 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/langkawi.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-13">Langkawi, Kedah</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Langkawi: Tropical paradise with pristine beaches, lush rainforests, and rich cultural heritage.
+                  Explore stunning landscapes, indulge in water activities, and discover unique ecosystems.
+                  Unforgettable travel experience awaits!
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 999</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-13')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D7 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/legoland.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-14">Legoland, Johor</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Legoland in Johor, Malaysia, is a world-class theme park that brings Lego
+                  to life. Enjoy interactive attractions, thrilling rides, and shows for all ages. Marvel at
+                  intricate Lego sculptures and explore themed areas like Miniland and Lego City. Cool off in the
+                  water park's slides and pools. Legoland is a dream destination for Lego enthusiasts and families
+                  seeking a fun-filled adventure.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 599</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-14')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D8 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/melaka.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-15">Jonker Street, Melaka</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Jonker Street in Melaka City, Malaysia, is a vibrant hub known for its rich
+                  heritage and diverse culinary delights. Sample Chicken Rice Balls, Satay Celup, and Nyonya
+                  cuisine. Cool down with refreshing Jonker Street Cendol or enjoy traditional Malaccan coffee.
+                  Explore cultural attractions like Cheng Hoon Teng Temple and browse through the Jonker Walk
+                  Night Market. Jonker Street is a lively destination that offers a taste of Melaka's heritage and
+                  mouthwatering flavors.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 349</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-15')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D9 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/pangkor.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-16">Pulau Pangkor, Perak</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Pulau Pangkor: A tranquil island off the west coast of Malaysia known for
+                  its beautiful beaches, clear waters, and lush rainforest. It offers a serene getaway with
+                  opportunities for relaxation, beach activities, snorkeling, fishing, and exploring historical
+                  attractions. With its natural beauty and peaceful atmosphere, Pulau Pangkor is a tropical
+                  paradise for those seeking a blissful island retreat.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 399</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-16')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D10 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/redang.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-17">Pulau Redang, Terengganu</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Pulau Redang: Located off the northeastern coast of Malaysia, is a tropical
+                  paradise renowned for its crystal-clear turquoise waters, powdery white sand beaches, and
+                  vibrant marine life. With its breathtaking coral reefs, it's a haven for snorkelers and divers.
+                  The island is blessed with lush greenery, offering opportunities for jungle trekking and
+                  exploring hidden waterfalls. Pulau Redang is an idyllic retreat where you can relax on pristine
+                  beaches, immerse yourself in the beauty of nature, and create unforgettable memories in a serene
+                  and picturesque setting.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 1299</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-17')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D11 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/sabah.jpeg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3" id="package-title-18">Semporna, Sabah</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Semporna: In Sabah, Malaysia, is a coastal town known for its stunning
+                  islands and marine life. Dive into fresh seafood dishes like seafood noodles and grilled fish.
+                  Stay refreshed with coconut water and tropical fruit juices. Explore world-class diving sites in
+                  nearby islands like Sipadan and Mabul. Semporna is a haven for nature lovers and seafood
+                  enthusiasts, offering unforgettable experiences and breathtaking landscapes.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 1099</span> per pax </h6>
+              <a href="#" onclick="redirectToBooking('package-title-18')" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D12 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/sarawak.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3">Sarawak Village, Sarawak</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Sarawak, Malaysia, offers rich cultural and heritage travel experiences.
+                  Immerse yourself in Iban longhouses, witness their traditional dances, and taste their cuisine.
+                  Explore Melanau fishing villages, learn about their seafaring heritage, and savor their unique
+                  dishes. Visit the Sarawak Cultural Village for a comprehensive cultural overview. Enjoy vibrant
+                  festivals and explore natural wonders like Bako National Park and Mulu Caves. Sarawak provides a
+                  memorable journey into diverse traditions, warm hospitality, and stunning landscapes.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 699</span> per pax </h6>
+              <a href="booking.html" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D13 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/selangor.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3">Kuala Selangor, Selangor</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  uala Selangor: Nature's retreat with breathtaking landscapes and diverse wildlife. Explore
+                  serene mangroves, witness mesmerizing firefly displays, and visit the iconic Kuala Selangor
+                  Lighthouse. Discover an array of bird species, including migratory birds, at Kuala Selangor
+                  Nature Park. Experience the tranquility of Bukit Melawati and spot silvered leaf monkeys. Kuala
+                  Selangor offers a peaceful escape and a chance to reconnect with nature's wonders.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 499</span> per pax </h6>
+              <a href="booking.html" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D14 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/sunway.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3">Sunway Lagoon, Selangor</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Sunway Lagoon in Selangor, Malaysia, is a renowned theme and water park
+                  complex. Experience thrilling rides, water attractions, and engaging activities for all ages.
+                  Enjoy the Water Park's slides and pools, the Amusement Park's rides, and the Wildlife Park's
+                  animal encounters. Adrenaline junkies can try extreme activities at the Extreme Park. Sunway
+                  Lagoon offers a day of non-stop fun and entertainment, complete with dining options and
+                  captivating shows.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 499</span> per pax </h6>
+              <a href="booking.html" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D15 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/tioman.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3">Pulau Tioman, Pahang</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Pulau Tioman: Located off the east coast of Peninsular Malaysia, is a
+                  breathtaking tropical island that enchants visitors with its pristine beaches, emerald waters,
+                  and lush rainforests. Surrounded by vibrant coral reefs, it is a haven for snorkeling and diving
+                  enthusiasts. The island also offers opportunities for hiking, jungle exploration, and wildlife
+                  spotting. With its idyllic landscapes and laid-back atmosphere, Pulau Tioman is a paradise for
+                  nature lovers and those seeking a peaceful escape in a picture-perfect setting.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 999</span> per pax </h6>
+              <a href="booking.html" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+        <!-- D16 -->
+        <div class="card mb-4 border-0 shadow">
+          <div class="row g-0 p-3 align-items-center">
+            <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+              <img src="assets/packages/zoo.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5 px-lg-3 px-md-3 px-0">
+              <h5 class="mb-3">Zoo Negara, Selangor</h5>
+              <div class="features mb-4">
+                <h6 class="mb-1">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                </h6>
+                <span class="badge pill bg-light text-bg-light text-wrap">
+                  Zoo Negara in Selangor, Malaysia, is a captivating wildlife destination.
+                  Explore diverse animal exhibits featuring elephants, tigers, orangutans, and more. The zoo
+                  promotes conservation and offers educational programs. Enjoy amenities like restaurants and
+                  picnic areas. Zoo Negara provides an enriching experience for animal lovers of all ages.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+              <h6 class="mb-4"><span class="enlarged-price">RM 199</span> per pax </h6>
+              <a href="booking.html" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">More details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Get the search icon element
+    var searchIcon = document.getElementById('search-icon');
+
+    // Get the menu toggle element
+    var menuToggle = document.querySelector('.menu-toggle');
+
+    // Get the navigation elements
+    var navElements = document.querySelectorAll('.nav');
+
+    // Get the search input
+    var searchInput = document.querySelector('.search-input');
+
+    // Add click event listener to the search icon
+    searchIcon.addEventListener('click', function () {
+      // Toggle the search class on navigation elements
+      navElements.forEach(function (element) {
+        element.classList.toggle('search');
+        element.classList.toggle('no-search');
+      });
+
+      // Toggle the search-active class on the search input
+      searchInput.classList.toggle('search-active');
+    });
+
+    // Add click event listener to the menu toggle
+    menuToggle.addEventListener('click', function () {
+      // Toggle the mobile-nav class on navigation elements
+      navElements.forEach(function (element) {
+        element.classList.toggle('mobile-nav');
+      });
+
+      // Toggle the is-active class on the menu toggle
+      this.classList.toggle('is-active');
+    });
+
+    // Add click event listener to the document
+    document.addEventListener('click', function (event) {
+      // Check if the clicked element is part of the search bar or the search icon
+      if (!searchInput.contains(event.target) && event.target !== searchIcon) {
+        // Close the search bar
+        searchInput.classList.remove('search-active');
+        navElements.forEach(function (element) {
+          element.classList.remove('search');
+          element.classList.add('no-search');
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

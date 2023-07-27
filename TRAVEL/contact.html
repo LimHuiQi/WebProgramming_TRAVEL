@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hotel Booking Website</title>
+    <!-- CSS only -->
+    <link rel="shortcut icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="substyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200&family=Poppins:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Nunito:ital,wght@1,200&family=Poppins:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <style>
+        .page-wrapper {
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            position: -webkit-sticky;
+            /* Safari */
+            position: sticky;
+            top: 0;
+            background: hsl(213, 33%, 84%);
+            z-index: 99;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .grad-bar {
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+            background-size: 400% 400%;
+            -webkit-animation: gradbar 15s ease infinite;
+            -moz-animation: gradbar 15s ease infinite;
+            animation: gradbar 15s ease infinite;
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 75px;
+            overflow: hidden;
+            position: relative;
+            z-index: 99;
+            margin-bottom: 20px;
+            /* Add margin-bottom as needed */
+        }
+
+        .navbar img {
+            height: 16px;
+            width: auto;
+            justify-self: start;
+            margin-left: 20px;
+        }
+
+        .navbar ul {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style-type: none;
+        }
+
+        .navbar li {
+            margin-right: 30px;
+        }
+
+        .navbar li a {
+            font-size: 1rem;
+        }
+
+        .nav-item a {
+            color: #333;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-decoration: none;
+            transition: color 0.3s ease-out;
+        }
+
+        .nav-item a:hover {
+            color: #3498db;
+        }
+
+        .logo {
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 25px;
+            /* Add other styling as needed */
+        }
+
+
+        .nav-links li {
+            margin-right: 15px;
+            margin-left: 15px;
+            /* display: inline; */
+            /* Add other styling as needed */
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            /* Add other styling as needed */
+        }
+
+
+
+        /* SEARCH FUNCTION */
+
+        #search-icon {
+            font-size: 0.9rem;
+            margin-top: 3px;
+            transition: color 0.3s ease-out;
+            margin-right: 30px;
+        }
+
+        #search-icon:hover {
+            color: #3498db;
+            cursor: pointer;
+        }
+
+        .search {
+            transform: translate(-35%);
+            -webkit-transform: translate(-35%);
+            transition: transform 0.7s ease-in-out;
+            color: #3498db;
+        }
+
+        .no-search {
+            transform: translate(0);
+            transition: transform 0.7s ease-in-out;
+        }
+
+        .search-input {
+            position: absolute;
+            top: -4px;
+            right: -100px;
+            /* Adjust the value as needed */
+            width: 100px;
+            /* Adjust the width as needed */
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.6s ease;
+        }
+
+        .search-active {
+            opacity: 1;
+            z-index: 0;
+        }
+
+        input {
+            border: 0;
+            border-left: 1px solid #ccc;
+            border-radius: 0;
+            /* FOR SAFARI */
+            outline: 0;
+            padding: 5px;
+        }
+
+        /* MOBILE MENU & ANIMATION */
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #3f3f3f;
+            margin: 5px auto;
+            -webkit-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-toggle {
+            justify-self: end;
+            margin-right: 25px;
+            display: none;
+        }
+
+        .menu-toggle:hover {
+            cursor: pointer;
+        }
+
+        #mobile-menu.is-active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        #mobile-menu.is-active .bar:nth-child(1) {
+            -webkit-transform: translateY(8px) rotate(45deg);
+            -ms-transform: translateY(8px) rotate(45deg);
+            -o-transform: translateY(8px) rotate(45deg);
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        #mobile-menu.is-active .bar:nth-child(3) {
+            -webkit-transform: translateY(-8px) rotate(-45deg);
+            -ms-transform: translateY(-8px) rotate(-45deg);
+            -o-transform: translateY(-8px) rotate(-45deg);
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* KEYFRAME ANIMATIONS */
+
+        @-webkit-keyframes gradbar {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        @-moz-keyframes gradbar {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        @keyframes gradbar {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="page-wrapper">
+            <div class="nav-wrapper">
+                <div class="grad-bar"></div>
+                <nav class="navbar">
+                    <a class="logo" href="index.html" style="color: #333; font-size: 1.5rem;">TRAVEL</a>
+                    <div class="menu-toggle" id="mobile-menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                    <ul class="nav no-search">
+                        <li class="nav-item"><a href="index.html">Home</a></li>
+                        <li class="nav-item"><a href="about.html">About Us</a></li>
+                        <li class="nav-item"><a href="destination.html">Destination</a></li>
+                        <li class="nav-item"><a href="packages.html">Packages</a></li>
+                        <li class="nav-item"><a href="contact.html">Contact Us</a></li>
+                        <i class="fas fa-search" id="search-icon"></i>
+                        <input class="search-input" id="search-input" type="text" placeholder="Search..">
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="my-5 px-4">
+        <h2 class="fw-bold h-font text-center">CONTACT US</h2>
+
+        <div class="h-line bg-dark"></div>
+        <p class="text-center mt-3">
+            "We value your feedback! Contact us to share your thoughts, suggestions, or any inquiries. We're here to
+            listen and improve your experience."
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mb-5 px-4">
+                <div class="bg-white rounded shadow p-4">
+                    <iframe class="w-100 rounded mb-4" height="320px"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7929.242403827999!2d100.51828759357912!3d6.44266179999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304cae75d919ac0b%3A0x480c41fc942dacd4!2sDPP%20Bukit%20Kachi%20UUM!5e0!3m2!1sen!2smy!4v1689084393179!5m2!1sen!2smy"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <h5>Address</h5>
+                    <a href="https://goo.gl/maps/dBDFgdP1VdR9GbMXA" target="_blank"
+                        class="d-inline-block text-decoration-none text-dark mb-2">
+                        <i class="bi bi-geo-alt-fill"></i> Bukit Kachi UUM, Kedah
+                    </a>
+                    <h5 class="mt-4">Call us</h5>
+                    <a href="tel: +60166749235" class="d-inline-block mb-2 text-decoration-none text-dark"><i
+                            class="bi bi-telephone-fill"></i> +60 166749235</a>
+                    <br>
+                    <a href="tel: +601127616806" class="d-inline-block mb-2 text-decoration-none text-dark"><i
+                            class="bi bi-telephone-fill"></i> +60 1127616806</a>
+                    <br>
+                    <a href="tel: +60162420019" class="d-inline-block mb-2 text-decoration-none text-dark"><i
+                            class="bi bi-telephone-fill"></i> +60 162420019</a>
+                    <h5 class="mt-4">Email</h5>
+                    <a href="mailto: kachigang@gmail.com" class="d-inline-block mb-2 text-decoration-none text-dark"><i
+                            class="bi bi-envelope-fill"></i> kachigang@gmail.com</a>
+
+                    <h5 class="mt-4">Follow us</h5>
+                    <a href="#" class="d-inline-block text-dark fs-5 me-2">
+                        <i class="bi bi-twitter me-1"></i>
+                    </a>
+
+                    <a href="#" class="d-inline-block text-dark fs-5 me-2">
+                        <i class="bi bi-facebook me-1"></i>
+                    </a>
+
+                    <a href="#" class="d-inline-block text-dark fs-5">
+                        <i class="bi bi-instagram me-1"></i>
+
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-5 px-4">
+                <div class="bg-white rounded shadow p-4">
+                    <form action="contact.php" method="POST">
+                        <h5>Send a message</h5>
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: 500;">Name</label>
+                            <input type="text" name="name" class="form-control shadow-none">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: 500;">Email</label>
+                            <input type="email" name="email" class="form-control shadow-none">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: 500;">Subject</label>
+                            <input type="text" name="subject" class="form-control shadow-none">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: 500;">Message</label>
+                            <textarea name="message" class="form-control shadow-none" rows="5"
+                                style="resize: none;"></textarea>
+                        </div>
+                        <button type="submit" class="btn text-white custom-bg mt-3 btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <script>
+        // Get the search icon element
+        var searchIcon = document.getElementById('search-icon');
+
+        // Get the menu toggle element
+        var menuToggle = document.querySelector('.menu-toggle');
+
+        // Get the navigation elements
+        var navElements = document.querySelectorAll('.nav');
+
+        // Get the search input
+        var searchInput = document.querySelector('.search-input');
+
+        // Add click event listener to the search icon
+        searchIcon.addEventListener('click', function () {
+            // Toggle the search class on navigation elements
+            navElements.forEach(function (element) {
+                element.classList.toggle('search');
+                element.classList.toggle('no-search');
+            });
+
+            // Toggle the search-active class on the search input
+            searchInput.classList.toggle('search-active');
+        });
+
+        // Add click event listener to the menu toggle
+        menuToggle.addEventListener('click', function () {
+            // Toggle the mobile-nav class on navigation elements
+            navElements.forEach(function (element) {
+                element.classList.toggle('mobile-nav');
+            });
+
+            // Toggle the is-active class on the menu toggle
+            this.classList.toggle('is-active');
+        });
+
+        // Add click event listener to the document
+        document.addEventListener('click', function (event) {
+            // Check if the clicked element is part of the search bar or the search icon
+            if (!searchInput.contains(event.target) && event.target !== searchIcon) {
+                // Close the search bar
+                searchInput.classList.remove('search-active');
+                navElements.forEach(function (element) {
+                    element.classList.remove('search');
+                    element.classList.add('no-search');
+                });
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
